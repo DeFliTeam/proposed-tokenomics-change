@@ -3,7 +3,7 @@
 
 # Proposed-tokenomics-change
 
-A Proposal to Change the Tokenomics of DeFli Network and Assoicated Tokens 
+A Proposal to Change the Tokenomics of DeFli Network and Associated Tokens 
 
 ## The Current Tokenomics and Reward Structure 
 
@@ -50,7 +50,61 @@ Network Score =
 
 Total Supply: 365,000,000  
 Epoch's: 144 hours, reducing by 24 hours per 6 months to a final 24 hour epoch
-86% Rewards | 7% Staking | 7% Team / Investors 
+86% Rewards | 7% Staking | 7% Team / Investors  
+
+## Security 
+
+Implement Gnosis SAFE Multi-Sig to Mint Function- Proposed Contract 
+
+```bash
+// SPDX-License-Identifier: MIT
+// Compatible with OpenZeppelin Contracts ^5.0.0
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
+
+/// @custom:security-contact team@defli.xyz
+contract DACARS is ERC20, ERC20Burnable, ERC20Pausable, AccessControl, ERC20Permit {
+    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+
+    constructor(address defaultAdmin, address pauser, address minter)
+        ERC20("DACARS", "DACARS")
+        ERC20Permit("DACARS")
+    {
+        _grantRole(DEFAULT_ADMIN_ROLE, defaultAdmin);
+        _grantRole(PAUSER_ROLE, pauser);
+        _mint(msg.sender, 18279248 * 10 ** decimals());
+        _grantRole(MINTER_ROLE, minter);
+    }
+
+    function pause() public onlyRole(PAUSER_ROLE) {
+        _pause();
+    }
+
+    function unpause() public onlyRole(PAUSER_ROLE) {
+        _unpause();
+    }
+
+    function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
+        _mint(to, amount);
+    }
+
+    // The following functions are overrides required by Solidity.
+
+    function _update(address from, address to, uint256 value)
+        internal
+        override(ERC20, ERC20Pausable)
+    {
+        super._update(from, to, value);
+    }
+}
+```
+
 
 
 
