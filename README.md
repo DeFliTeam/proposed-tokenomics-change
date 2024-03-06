@@ -40,7 +40,7 @@ Determined by:
 
 70%- Network revenue in previous epoch (Nr)
 10%- Device onboarding growth rate in previous epoch, weighted for onboarding costs (Do)
-20%- Staked percentage (Sp) 
+20%- Staked percentage (Sp)  
 
 Network Score =  
 
@@ -51,6 +51,8 @@ Network Score =
 Total Supply: 365,000,000  
 Epoch's: 144 hours, reducing by 24 hours per 6 months to a final 24 hour epoch
 86% Rewards | 7% Staking | 7% Team / Investors  
+
+60,000,000 per annum release years 1-3 followed by a halving event every 3 years
 
 ## Security 
 
@@ -104,6 +106,18 @@ contract DACARS is ERC20, ERC20Burnable, ERC20Pausable, AccessControl, ERC20Perm
     }
 }
 ```
+
+## Use of InfluxDB API 
+
+Data acquired by DeFli Devices is currently pushed to user specific buckets on InfluxDB. 
+
+DeFli processes 6-9 million messages per day making it unsuitable for pushing directly on to a pre-built chain. 
+
+InfluxDB will act as the Oracle for rewards assignment via GET API 
+
+## Future Integration 
+
+To use message compression techniques in enabling the DeFli private blockchain to become the Oracle for the rewards chain (BASE).
 
 
 
