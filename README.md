@@ -22,6 +22,10 @@ The network score is influenced by user revenue per token, network growth per to
 
 The master token will emit, per epoch, a fixed number of tokens. The allocation rate per network is determined by the network score or the current epoch. 
 
+## Creation 
+
+Contracts will be deployed on Optimism and then bridged to BASE to enable inclusion in the Optimism Superchain
+
 ## Changes to Current Tokenomics of Sub-Networks 
 
 None
