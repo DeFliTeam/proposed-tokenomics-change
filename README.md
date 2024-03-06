@@ -28,7 +28,8 @@ None
 
 ## Bringing Revenues On Chain 
 
-Through the current buy and burn methodology operating solely on the master-token. This supports the price of the master token whilst simultaneously increasing the value of the tokens emitted to each sub-network.
+Through the current buy and burn methodology operating solely on the master-token. This supports the price of the master token whilst simultaneously increasing the value of the tokens emitted to each sub-network. Per epoch DeFli will 
+commit a percentage of net revenues to the "master-token". This percentage will start at around 83% and will be announced at the time of epoch closure, this will be validated through an API pull from our sales ledger acting as an oracle.
 
 ## Staking 
 
